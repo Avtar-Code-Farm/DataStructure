@@ -1,4 +1,4 @@
-package avtar.singh.coding.problems.SlidingWindow;
+package Patterns.SlidingWindow;
 
 public class MinimumSizeSubarraySum {
 
