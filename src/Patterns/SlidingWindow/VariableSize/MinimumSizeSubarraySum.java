@@ -13,28 +13,37 @@ public class MinimumSizeSubarraySum {
         int target = 5;
 
         int[] nums = new int[] {2,4,5,1,1,1,1,1,5};
-        int res = minSubArrayLen(5, nums);
-        System.out.println("Max subarray size " + res + " with sum " + target);
+        int res = minSubArrayLen(target, nums);
+        System.out.println("Min subarray size " + res + " with sum " + target);
     }
 
     //1. Use two pointers: start and end to represent a window.
     //2. Move end to find a valid window.
     //3. When a valid window is found, move start to find a smaller window.
     public static int minSubArrayLen(int target, int[] nums ) {
-        int sum =0, max =0;
+        int min = Integer.MAX_VALUE;
 
         int start = 0;
-        for(int end = 0; end < nums.length; end++) {
-            // keep adding sum
+        int end = 0;
+        int sum = nums[0];
+
+        if(sum > target) return 1;
+        sum  = 0;
+
+        while(end < nums.length) {
             sum += nums[end];
 
-            // once the sum target found then remove the start sum and increment sum
-            if(sum >= target) {
-                max = Math.max(max, end - start + 1);
+            // reduce the window size once the sum found
+            // or basically Move start to find a smaller window.
+            while(sum >= target && start <= end) {
+                min = Math.min(min, end - start + 1);
                 sum -= nums[start];
                 start++;
             }
+
+            // move end to find the sum which is >= target
+            end ++;
         }
-        return max;
+        return min == Integer.MAX_VALUE ? 0 : min;
     }
 }
