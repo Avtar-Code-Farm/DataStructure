@@ -1,6 +1,6 @@
 package Patterns.SlidingWindow.VariableSize;
 
-public class MaximumSizeSubarraySum {
+public class MinimumSizeSubarraySum {
 
     //Given an array of positive integers nums and a positive integer target,
     // return the minimal length of a subarray whose sum is greater than or equal to target.
@@ -12,14 +12,14 @@ public class MaximumSizeSubarraySum {
     public static void main(String[] args) {
         int target = 5;
         int[] nums = new int[] {2,4,5,1,1,1,1,1,5};
-        int res = maxSubArrayLen(5, nums);
+        int res = minSubArrayLen(5, nums);
         System.out.println("Max subarray size " + res + " with sum " + target);
     }
 
     //1. Use two pointers: start and end to represent a window.
     //2. Move end to find a valid window.
     //3. When a valid window is found, move start to find a smaller window.
-    public static int maxSubArrayLen(int target, int[] nums ) {
+    public static int minSubArrayLen(int target, int[] nums ) {
         int sum =0, max =0;
 
         int start = 0;
