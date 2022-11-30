@@ -11,6 +11,7 @@ public class MinimumSizeSubarraySum {
 
     public static void main(String[] args) {
         int target = 5;
+
         int[] nums = new int[] {2,4,5,1,1,1,1,1,5};
         int res = minSubArrayLen(5, nums);
         System.out.println("Max subarray size " + res + " with sum " + target);
