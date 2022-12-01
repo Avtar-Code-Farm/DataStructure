@@ -14,39 +14,35 @@ public class MaximumSizeSubarraySumWithPositiveNumber {
     public static void main(String[] args) {
         int target = 5;
 
-        int[] nums = new int[] {4,1,1,1,2,3,5};
+        int[] nums = new int[] {3,1,1,2,5,1,1,1,1,1};
         int res = maxSubArrayLen(target, nums);
         System.out.println("max subarray size " + res + " with sum " + target);
     }
 
+
+
     //1. Use two pointers: start and end to represent a window.
-    //2. Move end to find a valid window.
-    //3. When a valid window is found, move start to find a smaller window.
+    //2. Move start to find a valid window i.e, target == sum
+    //3. When a valid window is found check its size and update the max
     public static int maxSubArrayLen(int target, int[] nums ) {
         int max = Integer.MIN_VALUE;
-
         int start = 0;
-        int end = 0;
-        int sum = nums[0];
+        int sum  = 0;
 
-        if(sum > target) return 1;
-        sum  = 0;
-
-        while(end < nums.length) {
+        for(int end = 0; end < nums.length; end++) {
             sum += nums[end];
 
-            // reduce the window size once the sum found
-            // or basically Move start to find a smaller window.
-            while(sum >= target && start <= end) {
-                if(sum == target)
-                    max = Math.max(max, end - start + 1);
+
+            if(sum == target) {
+                max = Math.max(max, end - start + 1);
+            }
+
+            while(sum > target) {
                 sum -= nums[start];
                 start++;
             }
-
-            // move end to find the sum which is >= target
-            end ++;
         }
+
         return max == Integer.MIN_VALUE ? 0 : max;
     }
 }
