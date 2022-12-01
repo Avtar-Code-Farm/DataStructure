@@ -12,7 +12,7 @@ public class LongestSubstringWithKUniqueCharacters {
         int target = 3;
         String str = "aabacbebebe";
         int res = LongestSubstringWithKUniqueCharactersFun(target, str);
-        System.out.println("Min subarray size " + res + " with sum " + target);
+        System.out.println("size " + res + " with target " + target);
     }
 
     //1. Use two pointers: start and end to represent a window.
