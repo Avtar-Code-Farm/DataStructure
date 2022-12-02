@@ -5,7 +5,9 @@ import java.util.Map;
 
 public class ToyPickProblem {
     
-    // There are number of toys however kid can choose max of two type of toys in continuation. 
+    // John is at a toy store help him pick maximum number of toys. He can only select in a continuous manner, and he can select only two types of toys.
+    //
+    // There are number of toys however kid can choose max of two type of toys in continuation.
     // cat, mat, cat, cat, rat, rat, cat
     // 0    1     2     3   4   5     6
     // In this case, to maximize benifit, a user must choose 2,3,4,5,6.
