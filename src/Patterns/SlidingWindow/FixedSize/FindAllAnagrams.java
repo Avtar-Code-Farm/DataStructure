@@ -22,7 +22,38 @@ public class FindAllAnagrams {
     public static void main(String[] args) {
         String s =  "cbaebabacd";
         String p = "abc";
-        List<Integer> results = GetAllAnagrams(s,p);
+        //List<Integer> results = GetAllAnagrams(s,p);
+        List<Integer> results = GetAllAnagramsSimplified(s,p);
+    }
+
+    public static List<Integer> GetAllAnagramsSimplified(String s, String p ){
+        // we will use int[26] array to hold the count of each character occurrance
+        // Again we will use the window approach. Window size = p.length()
+        List<Integer> result = new ArrayList<Integer>();
+
+        int left = 0;
+        int[] smap = new int[26]; // hold occurance count in the substring of s string
+        int[] pmap = new int[26];  // hold occurance count of the character in the p string
+
+        // first load the pmap
+        int k = p.length();
+        for(int i = 0; i < k; i++){
+            pmap[p.charAt(i) - 'a']++;
+        }
+
+        for(int right = 0; right < s.length(); right++){
+            smap[s.charAt(right) - 'a']++;
+
+            if(right - left + 1 == k) {// window limit reached
+                // check if smap and pmap are equal;
+                if(Arrays.equals(smap,pmap)) result.add(left);
+                // now remove the left character from smap and increment it so that we can test next window
+                smap[s.charAt(left) - 'a']--;
+                left++;
+            }
+        }
+
+        return  result;
     }
 
     // We will use sliding window approach with hashmap to compare string
