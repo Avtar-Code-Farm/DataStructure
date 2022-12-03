@@ -2,12 +2,13 @@ package Patterns.SlidingWindow.FixedSize;
 
 
 // Given an array of integers of size ‘n’, Our aim is to calculate the maximum sum of ‘k’ consecutive elements in the array.
-public class  MaxSumArrayProblem  {
+public class MaxSumArrayProblem_1 {
 
     public static void main(String[] args) {
         int[] nums = new int [] {1, 4, 2, 10, 23, 3, 1, 0, 20};
         int result =  getMaxSumByKConsecutiveVariables(nums, 4);
         System.out.println("Result = " + result);
+        int[] results = SingleLoopWithActualElements(nums, 4);
     }
 
     // Example: Given an array of integers of size ‘n’, Our aim is to calculate the maximum sum of ‘k’ consecutive elements in the array.
@@ -74,5 +75,34 @@ public class  MaxSumArrayProblem  {
         }
 
         return max;
+    }
+
+    public static int[] SingleLoopWithActualElements(int[] nums, int k) {
+        if(nums.length == 0 || k <= 0 ) return new int[0];
+        int[] result = new int[k];
+        int start = 0;
+        int max = 0;
+        int curr = 0;
+        int index = 0;
+
+        for(int end = 0; end < nums.length; end++) {
+            curr += nums[end];
+
+            // once window met increment start and set max
+            if(end - start + 1 == k){
+                if(curr >= max) {
+                    max = curr;
+                    index = 0;
+                    for(int p = start; p<=end; p++) {
+                        result[index++] = nums[p];
+                    }
+                }
+
+                curr -= nums[start];
+                start++;
+            }
+
+        }
+        return result;
     }
 }
