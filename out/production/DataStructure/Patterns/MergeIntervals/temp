@@ -1,0 +1,49 @@
+//Problem Statement #
+// Given an array of intervals representing ‘N’ appointments, find out if a person can attend all the appointments.
+
+// Appointments: [[1,4], [2,5], [7,9]]
+// Output: false
+// Explanation: Since [1,4] and [2,5] overlap, a person cannot attend both of these appointments.
+
+// Example 2:
+
+   //Appointments: [[6,7], [2,4], [8,12]]
+   //Output: true
+   //Explanation: None of the appointments overlap, therefore a person can attend all of them.
+
+
+list -> [[2,4], [6,7], [8,12]]
+
+current  list.get(i)
+2, 4     6,7
+6,7       8, 12
+
+======
+list -> [[1,4], [2,5], [7,9]]
+
+current  list.get(i)
+1,4        2, 5
+
+
+public static boolean canAttendAllAppointments(List<Interval> list) {
+    if(list.size() == 0) return false;
+    else if(list.size() == 1) return true;
+
+    Collections.sort(list, (a,b) -> Integer.compare(a.start, b.start));
+
+    Interval current =list.get(0);
+
+    for(int i = 1; i < list.size(); i++) {
+        if(isOverlap(current, list.get(i)) {
+            return false;
+        }
+        current = list.get(i);
+    }
+    return true;
+}
+
+public static boolean isOverlap(Interval a, Interval b) {
+    int front = Math.max(a.start, b.start);
+    int back = Math.min(a.end, b.end);
+    return back - front > 0;
+}
