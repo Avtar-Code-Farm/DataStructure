@@ -17,10 +17,10 @@ import java.util.List;
 public class ThreeSum {
     public static void main(String[] args) {
         int[] nums = new int [] {-3, 0, 1, 2, -1, 1, -2};
-        ArrayList<ArrayList<Integer>> result = printThreeSumPair(nums);
+        ArrayList<ArrayList<Integer>> result = printThreeSumPairWithSumZero(nums , 0);
     }
 
-    private static ArrayList<ArrayList<Integer>>  printThreeSumPair(int[] nums) {
+    private static ArrayList<ArrayList<Integer>>  printThreeSumPairWithSumZero(int[] nums, int k) {
         // first sort it
         // then use the two sum solution
         Arrays.sort(nums);
@@ -31,7 +31,7 @@ public class ThreeSum {
             if(i == 0 || (i > 0 && nums[i] != nums[i-1])) {
                 int start = i + 1;
                 int end = nums.length - 1;
-                int target = 0-nums[i];
+                int target = k-nums[i]; // remove the current number from the k. Next we need to find if there is pair with the left out value.
 
                 int[] arr =  checkSumPair(nums, target, start, end);
                 if(arr.length == 2 ) {

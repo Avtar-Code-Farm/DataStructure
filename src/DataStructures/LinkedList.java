@@ -8,7 +8,15 @@ public class LinkedList {
         head = new Node(data, null);
     }
 
-
+    public void Print(Node start){
+        System.out.println("------------------");
+        while(start != null) {
+            System.out.print(" " + start.data);
+            start = start.next;
+        }
+        System.out.println();
+        System.out.println("------------------");
+    }
 
     public void AddAtTheEnd(int data) {
         Node next = new Node(data, null);
