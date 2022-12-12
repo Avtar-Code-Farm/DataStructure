@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Map;
 
 
-//Given a string you need to print longest possible substring that has exactly M unique characters.
+// Given a string you need to print longest possible substring that has exactly M unique characters.
 // If there is more than one substring of longest possible length, then print any one of them.
 // Examples:
 //

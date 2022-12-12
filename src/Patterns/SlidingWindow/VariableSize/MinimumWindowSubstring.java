@@ -29,11 +29,96 @@ import java.util.Map;
 public class MinimumWindowSubstring {
 
     public static void main(String[] args) {
-        String target = "aba";
-        String str = "acbbaca";
-        String res = MinimumWindowSubstringFun(target, str);
-        System.out.println("size " + res + " with target " + target);
+        String target = "ABC";
+        String str = "ADOBECODEBANC";
+  //      String res = MinimumWindowSubstringFun(target, str);
+  //      System.out.println("size " + res + " with target " + target);
+        String res2 = minimumWindowSubStringSimplified(target, str);
     }
+
+    //https://medium.com/kode-shaft/solve-minimum-window-substring-problem-9cb3544eeb91
+
+    private static String minimumWindowSubStringSimplified(String t, String s){
+        if(s == null || t == null) return "";
+
+            // ASCII is used which is 128 characters so this is why a 128 array size is used.
+        int[] map = new int[128];
+        for(char ch: t.toCharArray()) map[ch]++;
+
+        int start = 0, min = Integer.MAX_VALUE, counter = t.length(), min_start = -1;
+        for(int end = 0; end < s.length(); end++) {
+            char ch_end = s.charAt(end);
+            // it means we encounter the character
+            if(map[ch_end] > 0) counter --;
+
+            // just decrement the counter for all the cases
+            map[ch_end]--;
+
+            while(counter == 0) {
+                char ch_start = s.charAt(start);
+                if(end - start + 1 < min) {
+                    min = end - start + 1;
+                    min_start = start;
+                }
+
+                // only those character which are part of the t will become zero rest of them are negative.
+                map[ch_start]++; // now we are going out of window, simply incrment the counter of the character
+                // if the character is from the t string then it will be > 0 if not then it will be zero max.
+                // and this is the reason we are decrementing everytime. check line number 54.
+
+                if(map[ch_start] > 0 ) counter++; // increment the counter since the character we interested in 
+                start++;
+            }
+        }
+        String result = min == Integer.MAX_VALUE ? "" : s.substring(min_start, min_start + min);
+        return  result;
+
+//
+//        int[] target_map = new int[56];
+//        int[] source_map = new int[56];
+//        for(char ch : t.toCharArray()) {
+//            target_map[ch - 'a']++;
+//        }
+//
+//        int start = 0;
+//        int min = Integer.MAX_VALUE;
+//
+//        // iterate over the string
+//        // if character exists in the target map then increment the count in the source map
+//        // if character in the source map == 1 then increment the count
+//        // if count == t.Length then
+//        //      - Get the start character
+//        //          - if start character exists in the target map then reduces its count from the source map
+//        //              and if count == 0 then reduce the count
+//        //        recalculate the min
+//        // return min
+//        int count = 0;
+//        for(int end = 0; end < s.length(); end++) {
+//            char ch_end = s.charAt(end);
+//
+//            if (target_map[ch_end - 'a'] > 0) {
+//                source_map[ch_end - 'a']++;
+//            }
+//            if (source_map[ch_end - 'a'] == target_map[ch_end - 'a']) count += target_map[ch_end - 'a'];
+//
+//            while (count > t.length()) {
+//                char ch_start = s.charAt(start);
+//                // we are interested in this character
+//                if (target_map[ch_start - 'a'] > 0) {
+//                    source_map[ch_start - 'a']--;
+//                }
+//                // now check if it is the last character in the source_map
+//                if (source_map[ch_start - 'a'] == 0) count -= target_map[ch_start - 'a'];
+//                start++;
+//            }
+//
+//            if (count == t.length())
+//                min = Math.min(min, end - start + 1);
+//        }
+//
+//        return min;
+    }
+
 
     private static String MinimumWindowSubstringFun(String t, String s) {
         String result = "";

@@ -11,7 +11,6 @@ public class LinkedListPalindrome {
         list.AddAtTheEnd(6);
         list.AddAtTheEnd(4);
         list.AddAtTheEnd(2);
-        list.AddAtTheEnd(1);
 
 
         IsPalindrome(list);
