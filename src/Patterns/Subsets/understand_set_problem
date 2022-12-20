@@ -1,0 +1,22 @@
+  In the recursion function, we either continue with the current elemnet or include the next element.
+  // wheneve we reaches length of index == nums.length we add the set into the ans list.
+  [ 7, 8 ,9]
+   0   1  2
+ index                  [ 7, 8 ,9]
+ 0                  ""                    7
+ 1             ""        8            7            7 8
+ 2           ""  {9}  {8}  {8,9}   {7} {7,9}    {7,8}   {7,8,9}
+
+
+
+Template
+
+ fun(list, templist, nums, start)
+ {
+    list.add(templist);
+    for(int i = start; i< nums.size(); i++){
+        templist.add(nums[i]);
+        fun(list, templist, nums, start+1);
+        templist.removs(templist.size() -1);
+    }
+ }

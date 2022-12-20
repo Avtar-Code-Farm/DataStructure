@@ -1,7 +1,6 @@
 package Patterns.SlidingWindow.VariableSize;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 
 
@@ -29,10 +28,40 @@ import java.util.Map;
 //Explanation: There are only two unique characters, thus show error message.
 public class LongestSubstringWithKUniqueCharacters {
     public static void main(String[] args) {
-        int target = 3;
-        String str = "aabacbebebe";
-        int res = LongestSubstringWithKUniqueCharactersFun(target, str);
-        System.out.println("size " + res + " with target " + target);
+
+       // int res = LongestSubstringWithKUniqueCharactersFun(target, str);
+        int res = simplified(2, "aabbccc");
+        System.out.println("size " + res );
+        res = simplified(3, "aabacbebebe");
+        System.out.println("size " + res );
+    }
+
+    public static int simplified(int k, String str) {
+        if(str == null || str.length() == 0) return -1;
+
+        int start = 0;
+        int counter = 0;
+        int max = Integer.MIN_VALUE;
+        int[] map = new int[256];
+
+        for(int end = 0 ; end < str.length(); end++) {
+            char ch_end = str.charAt(end);
+            // increment the counter when we encounter the character first time.
+            if(map[ch_end] == 0) counter++;
+            // increment the count now
+            map[ch_end]++;
+
+            // in case unique character count exceeds K we will reduce the window size.
+            while(counter > k) {
+                char ch_start = str.charAt(start++);
+                map[ch_start]--;
+                if(map[ch_start] == 0) counter--;
+            }
+
+            max = Math.max(max, end - start + 1);
+
+        }
+        return  max;
     }
 
     //1. Use two pointers: start and end to represent a window.
@@ -68,4 +97,5 @@ public class LongestSubstringWithKUniqueCharacters {
 
         return max == Integer.MIN_VALUE ? 0 : max;
     }
+
 }

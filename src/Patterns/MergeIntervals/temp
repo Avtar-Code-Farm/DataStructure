@@ -11,6 +11,16 @@
    //Output: true
    //Explanation: None of the appointments overlap, therefore a person can attend all of them.
 
+// this method is the key. The most confusion part with time interval is the finding overlap
+public static boolean isOverlap(Interval a, Interval b) {
+    int front = Math.max(a.start, b.start);
+    int back = Math.min(a.end, b.end);
+    return back - front > 0;
+}
+
+// how to sort list<interval>
+
+Collection.sort(list, (a,b) -> Integer.compare(a.start, b.start);
 
 list -> [[2,4], [6,7], [8,12]]
 
@@ -42,8 +52,3 @@ public static boolean canAttendAllAppointments(List<Interval> list) {
     return true;
 }
 
-public static boolean isOverlap(Interval a, Interval b) {
-    int front = Math.max(a.start, b.start);
-    int back = Math.min(a.end, b.end);
-    return back - front > 0;
-}

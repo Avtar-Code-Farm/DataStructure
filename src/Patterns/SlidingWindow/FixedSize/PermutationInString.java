@@ -60,9 +60,9 @@ public class PermutationInString {
 
         // increment the occurence of each character for the ptr
         // for abc string -> [1,1,1, 0, 0, 0.....]
-        for (char ch : ptr.toCharArray()) {
-            map[ch]++;
-        }
+            for (char ch : ptr.toCharArray()) {
+                map[ch]++;
+            }
 
         int counter = ptr.length();
 

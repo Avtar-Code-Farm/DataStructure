@@ -22,7 +22,7 @@ public class MaximumSizeSubarraySumWithPositiveNumber {
 
 
     //1. Use two pointers: start and end to represent a window.
-    //2. Move start to find a valid window i.e, target == sum
+    //2. Move end to find a valid window i.e, target == sum
     //3. When a valid window is found check its size and update the max
     public static int maxSubArrayLen(int target, int[] nums ) {
         int max = Integer.MIN_VALUE;

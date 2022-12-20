@@ -45,26 +45,50 @@ public class MergeIntervals {
 //becomes...
 //[18                30]
         list.add(new Interval(1,3));
-        list.add(new Interval(5,10));
-        list.add(new Interval(7,15));
-        list.add(new Interval(18,30));
+        list.add(new Interval(2,6));
+        list.add(new Interval(8,10));
+        list.add(new Interval(15,18));
         list.add(new Interval(22,25));
 
 
-        List<Interval> resultl = MergeOverlapInterval(list);
-
+        List<Interval> output = process(list); // MergeOverlapInterval(list);
+        int[][] res = new int[output.size()][2];
+        int index = 0;
+        for(Interval temp : output) {
+            res[index][0] = temp.start;
+            res[index++][1] = temp.end;
+        }
     }
 
-    public static List<Interval> MergeOverlapInterval(List<Interval> input) {
+    public static List<Interval>  process(List<Interval> list) {
+        List<Interval> out = new ArrayList<Interval>();
+        Collections.sort(list, (a, b) -> Integer.compare(a.start, b.start));
+        Interval prev = list.get(0);
+
+        for(int i = 1; i < list.size(); i++) {
+            Interval cur = list.get(i);
+            if(isOverlap(prev, cur)) {
+                // prev.start = Math.min(prev.start, cur.start);
+                prev.end = Math.max(prev.end, cur.end);
+            } else {
+                out.add(prev);
+                prev = cur;
+            }
+        }
+        out.add(prev);
+        return out;
+    }
+
+    public static List<Interval> MergeOverlapInterval(List<Interval> list) {
         List<Interval> output = new ArrayList<>();
-        if(input.size() <= 1) return input;
+        if(list.size() <= 1) return list;
 
-        Collections.sort(input, (a, b) -> Integer.compare(a.start, b.start));
+        Collections.sort(list, (a, b) -> Integer.compare(a.start, b.start));
 
-        Interval current  = input.get(0);
+        Interval current  = list.get(0);
 
-        for(int i = 0; i < input.size(); i++) {
-            Interval next = input.get(i);
+        for(int i = 0; i < list.size(); i++) {
+            Interval next = list.get(i);
 
             if(isOverlap(current, next)){
                 // merge it but don't add it to result because we have to check it with the next interval before adding it to the result

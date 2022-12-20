@@ -1,0 +1,23 @@
+https://emre.me/coding-patterns/cyclic-sort/
+
+Two key points
+
+nums[i] means number at the index
+
+nums[i]-1 means find the index of the number which is placed on the nums[i]
+nums[nums[i]-1] means find the corresponding number for swap.
+
+4 3 2 1
+0 1 2 3
+
+nums[2] = 1 -> it means we must have 1 at the index 1.
+nums[2] -1 = 0 -> it means we must move to the 0 index
+
+now lets find what is at the zero index
+
+nums[nums[2]-1] = nums[0] = 4
+
+now swap  these values
+
+1 3 2 4
+0 1 2 3

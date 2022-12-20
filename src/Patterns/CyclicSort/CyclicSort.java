@@ -6,12 +6,33 @@ import java.util.List;
 public class CyclicSort {
     public static void main(String[] args) {
         int[] nums = new int[] {1, 5, 6, 4, 3, 2};
-        int[] sort = sort(nums);
+        sort_cyclic(nums);
+        //int[] sort = sort(nums);
         int res = findMissingNumber(new int[]{4,0,3,1});
         int res2 = findMissingNumber(new int[]{8,3,5,2,4,6,0,1});
 
         int[] res3= findAllMissingNumber(new int[]{2, 3, 1, 8, 2, 3, 5, 1});
         int[] res4 = findAllDuplicates(new int[]{5, 4, 7, 2, 3, 5, 3});
+    }
+
+    private static void sort_cyclic(int[] nums ) {
+        if(nums.length == 0) return;
+        int i = 0;
+        while(i < nums.length) {
+            // this is required because numbers are starting from 1 to N and we cannot index a number which is > nums.length
+            if(nums[i] <= nums.length && nums[i] != nums[nums[i]-1]) {
+                swap(nums, i, nums[i]-1);
+            } else {
+                i++;
+            }
+        }
+
+    }
+
+    private static void swap(int[] nums, int i, int j){
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
     }
 
     private static int[] sort(int[] nums) {

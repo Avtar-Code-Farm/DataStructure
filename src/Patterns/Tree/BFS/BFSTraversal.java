@@ -1,5 +1,6 @@
 package Patterns.Tree.BFS;
 
+import Patterns.Tree.TreeNode;
 import com.sun.source.tree.Tree;
 
 import java.util.*;
@@ -19,12 +20,14 @@ public class BFSTraversal {
 
         printLevelWiseBFS(root);
         printLevelOrderLinebyLine(root);
+        printeLevelWise_Simplified_BFS(root);
         System.out.println(root);
         printPreOrder_DLR(root);
         System.out.println(root);
         printInOrder_DLR(root);
         printBottomUpLevelOrder(root);
         printZigZag(root);
+
         List<Double> res = getAvgByLevel(root);
 
         TreeNode n = findLevelOrderNextSuccessor(root, 3);
@@ -105,6 +108,27 @@ public class BFSTraversal {
         }
     }
 
+    // we will use level size to process all notes at the current level
+    private static void printeLevelWise_Simplified_BFS(TreeNode root){
+        Queue<TreeNode> q = new LinkedList<>();
+        int queueSize = 0;
+        q.add(root);
+        System.out.println("printeLevelWise_Simplified_BFS");
+        System.out.println();
+        while(!q.isEmpty()) {
+            queueSize = q.size();
+            while(queueSize > 0) {
+                TreeNode node = q.poll();
+                System.out.print(" " + node.data);
+                if(node.left != null) q.add(node.left);
+                if(node.right != null) q.add(node.right);
+                queueSize--;
+            }
+            System.out.println();
+        }
+        System.out.println("printeLevelWise_Simplified_BFS");
+    }
+
     private static void printBottomUpLevelOrder(TreeNode root) {
         Stack<TreeNode> stack = new Stack<>();
         Queue<TreeNode> queue = new LinkedList<>();
@@ -137,6 +161,7 @@ public class BFSTraversal {
          Stack<TreeNode> s2 = new Stack<>(); // add element left and then right
 
          s1.push(node);
+         System.out.println("printZigZag");
         List<List<Integer>> result = new ArrayList<List<Integer>>();
          while(!s1.isEmpty() || !s2.isEmpty()) {
 
@@ -154,6 +179,8 @@ public class BFSTraversal {
              }
          }
     }
+
+
 
     public static List<Double> getAvgByLevel(TreeNode node) {
         List<Double> result = new ArrayList<>();
@@ -255,8 +282,8 @@ public class BFSTraversal {
 
                 // connect nodes;
                 prev.next = cur;
+                prev = cur;
             }
-            prev = cur;
         }
         return root;
     }

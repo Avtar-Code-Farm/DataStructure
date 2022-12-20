@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 //Problem Statement #
-//Given a list of non-overlapping intervals sorted by their start time, insert a given interval at the correct position and merge all necessary intervals to produce a list that has only mutually exclusive intervals.
+//Given a list of non-overlapping intervals sorted by their start time, insert a given interval at the correct position
+// and merge all necessary intervals to produce a list that has only mutually exclusive intervals.
 //
 //Example 1:
 //
@@ -66,7 +67,6 @@ public class InsertInterval {
 
         // now add the new interval after finishing the overalap
         result.add(temp);
-
 
         // now add the remaining element to the list
         while(index < list.size()) {

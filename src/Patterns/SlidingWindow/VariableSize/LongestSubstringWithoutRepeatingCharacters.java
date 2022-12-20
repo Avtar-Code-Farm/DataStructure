@@ -15,8 +15,29 @@ public class LongestSubstringWithoutRepeatingCharacters {
 
     public static void main(String[] args) {
         String str = "pwwpkews";
-        int res = LongestSubstringWithoutRepeatingCharactersFun(str);
+        int res = simplified(str);// LongestSubstringWithoutRepeatingCharactersFun(str);
         System.out.println("size " + res);
+        res = simplified("pwwkew");
+    }
+
+    private static int simplified(String str) {
+        if(str == null || str.length() == 0) return 0;
+
+        // use ascii value
+        int[] map = new int[256];
+        int start = 0;
+        int max = 0;
+        for(int end = 0; end < str.length(); end++) {
+            char ch = str.charAt(end);
+            map[ch]++;
+
+            while(map[ch] > 1) {
+                char ch_start = str.charAt(start++);
+                map[ch_start]--;
+            }
+            max = Math.max(max, end - start + 1);
+        }
+        return  max;
     }
 
     private static int LongestSubstringWithoutRepeatingCharactersFun( String str) {

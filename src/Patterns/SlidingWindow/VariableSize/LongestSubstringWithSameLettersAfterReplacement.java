@@ -10,6 +10,10 @@ public class LongestSubstringWithSameLettersAfterReplacement {
         System.out.println("size " + res + " with target " + k);
     }
 
+    // The most imp part here is to find the window
+    // i.e start - end +1 - maxoccurence of the character in the given window.
+    // why max occurencae -> becuase it will help us to replace the rest of the number with k but if we get more
+    // character then k it means we are going out of the window.
     private static int LongestSubstringWithSameLettersAfterReplacement_FUN(int k, String str) {
         int[] map = new int[128];
 
