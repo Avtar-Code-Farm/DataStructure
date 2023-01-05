@@ -31,6 +31,9 @@ public class MinimumMeetingRooms {
     // check if there is overlap. if no overlap keep moving
     // if there is overlaop then check if there is any other meeting which started earlier is over. curr_meeting.start > previous_meeting.end
     // If we found one meeting then no need to increment the count other wise simply add the meeting end time to the queue and record the max with queue size
+
+    // https://www.youtube.com/watch?v=3hvbRwnEfGg
+
     public static int findNumberOfRoom(List<Interval> list) {
         int max = 1;
         if(list.size() <= 1) return max;
@@ -42,11 +45,11 @@ public class MinimumMeetingRooms {
 
         for(int i = 0; i < list.size(); i++) {
             if(!queue.isEmpty() && queue.peek() <= list.get(i).start) queue.poll();
-            queue.offer(list.get(i).end);
+           ;
             max = Math.max(max, queue.size());
         }
 
-
+       // queue.offer(list.get(i).end)
         return max;
     }
 

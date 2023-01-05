@@ -5,11 +5,12 @@ import java.util.Map;
 
 public class MaximumSizeSubarraySumWithNegativeNumber {
     public static void main(String[] args) {
-        int target = 3;
+        int target = 6;
 
-        int[] nums = new int[] {5,1,2,-3,3,-1,2,4};
-        int res = maxSubArrayWithNegativeNumberLen(target, nums);
-        System.out.println("max subarray size " + res + " with sum " + target);
+     //   int[] nums = new int[] {5,1,2,-3,3,-1,2,4};
+        int[] nums = new int[] {1, 2, 3, 1, 2, 3};
+    //    int res = maxSubArrayWithNegativeNumberLen(target, nums);
+    //    System.out.println("max subarray size " + res + " with sum " + target);
         int res2 = getMaxLengthSubArrayWithKSum(nums, target);
     }
 

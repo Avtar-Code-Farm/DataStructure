@@ -141,6 +141,7 @@ public class DFSProblems {
 
     public static boolean isGivenPathExistSimplified(TreeNode root, int index, List<Integer> list) {
         if(root == null || index >= list.size()) return false;
+        // it means we are on a path which will never match with the input list.
         if(root.data != list.get(index)) {
             return  false;
         }
@@ -184,7 +185,7 @@ public class DFSProblems {
         treeDiameter.set(Math.max(treeDiameter.get(), current_diameter));
 
         // It is imp to return the height of the subtree rooted at the current node
-        return Math.max(left,right) +1;
+        return Math.max(left,right) +1; // +1 is to include the current node
     }
 
     // path with maximum sum

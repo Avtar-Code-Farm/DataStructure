@@ -50,4 +50,6 @@ public class PermutationOfDistinctNumber {
             temp.remove(temp.size() - 1);
         }
     }
+
+
 }
